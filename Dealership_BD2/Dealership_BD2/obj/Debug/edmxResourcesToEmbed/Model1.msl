@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище DealershipModelContainer" CdmEntityContainer="DealershipEntities">
+    <EntitySetMapping Name="Brands">
+      <EntityTypeMapping TypeName="DealershipModel.Brands">
+        <MappingFragment StoreEntitySet="Brands">
+          <ScalarProperty Name="ID_Brand" ColumnName="ID_Brand" />
+          <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="DealershipModel.Customers">
+        <MappingFragment StoreEntitySet="Customers">
+          <ScalarProperty Name="ID_Customer" ColumnName="ID_Customer" />
+          <ScalarProperty Name="CustomerSurname" ColumnName="CustomerSurname" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="CustomerMiddleName" ColumnName="CustomerMiddleName" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Models">
+      <EntityTypeMapping TypeName="DealershipModel.Models">
+        <MappingFragment StoreEntitySet="Models">
+          <ScalarProperty Name="ID_Model" ColumnName="ID_Model" />
+          <ScalarProperty Name="ModelName" ColumnName="ModelName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="DealershipModel.Orders">
+        <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="ID_Order" ColumnName="ID_Order" />
+          <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+          <ScalarProperty Name="Vehicle_ID" ColumnName="Vehicle_ID" />
+          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vehicles">
+      <EntityTypeMapping TypeName="DealershipModel.Vehicles">
+        <MappingFragment StoreEntitySet="Vehicles">
+          <ScalarProperty Name="ID_Vehicle" ColumnName="ID_Vehicle" />
+          <ScalarProperty Name="Brand_ID" ColumnName="Brand_ID" />
+          <ScalarProperty Name="Model_ID" ColumnName="Model_ID" />
+          <ScalarProperty Name="Years" ColumnName="Years" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

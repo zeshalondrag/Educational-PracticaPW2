@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DealershipModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Brands">
+    <Key>
+      <PropertyRef Name="ID_Brand" />
+    </Key>
+    <Property Name="ID_Brand" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BrandName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Vehicles" Relationship="Self.FK__Vehicles__Brand___5629CD9C" FromRole="Brands" ToRole="Vehicles" />
+  </EntityType>
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="ID_Customer" />
+    </Key>
+    <Property Name="ID_Customer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CustomerSurname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CustomerMiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__Customer__59FA5E80" FromRole="Customers" ToRole="Orders" />
+  </EntityType>
+  <EntityType Name="Models">
+    <Key>
+      <PropertyRef Name="ID_Model" />
+    </Key>
+    <Property Name="ID_Model" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ModelName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Vehicles" Relationship="Self.FK__Vehicles__Model___571DF1D5" FromRole="Models" ToRole="Vehicles" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="ID_Order" />
+    </Key>
+    <Property Name="ID_Order" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Customer_ID" Type="Int32" Nullable="false" />
+    <Property Name="Vehicle_ID" Type="Int32" Nullable="false" />
+    <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Amount" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Customers" Relationship="Self.FK__Orders__Customer__59FA5E80" FromRole="Orders" ToRole="Customers" />
+    <NavigationProperty Name="Vehicles" Relationship="Self.FK__Orders__Vehicle___5AEE82B9" FromRole="Orders" ToRole="Vehicles" />
+  </EntityType>
+  <EntityType Name="Vehicles">
+    <Key>
+      <PropertyRef Name="ID_Vehicle" />
+    </Key>
+    <Property Name="ID_Vehicle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Brand_ID" Type="Int32" Nullable="false" />
+    <Property Name="Model_ID" Type="Int32" Nullable="false" />
+    <Property Name="Years" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <NavigationProperty Name="Brands" Relationship="Self.FK__Vehicles__Brand___5629CD9C" FromRole="Vehicles" ToRole="Brands" />
+    <NavigationProperty Name="Models" Relationship="Self.FK__Vehicles__Model___571DF1D5" FromRole="Vehicles" ToRole="Models" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__Vehicle___5AEE82B9" FromRole="Vehicles" ToRole="Orders" />
+  </EntityType>
+  <Association Name="FK__Vehicles__Brand___5629CD9C">
+    <End Role="Brands" Type="Self.Brands" Multiplicity="1" />
+    <End Role="Vehicles" Type="Self.Vehicles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Brands">
+        <PropertyRef Name="ID_Brand" />
+      </Principal>
+      <Dependent Role="Vehicles">
+        <PropertyRef Name="Brand_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Orders__Customer__59FA5E80">
+    <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customers">
+        <PropertyRef Name="ID_Customer" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="Customer_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Vehicles__Model___571DF1D5">
+    <End Role="Models" Type="Self.Models" Multiplicity="1" />
+    <End Role="Vehicles" Type="Self.Vehicles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Models">
+        <PropertyRef Name="ID_Model" />
+      </Principal>
+      <Dependent Role="Vehicles">
+        <PropertyRef Name="Model_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Orders__Vehicle___5AEE82B9">
+    <End Role="Vehicles" Type="Self.Vehicles" Multiplicity="1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vehicles">
+        <PropertyRef Name="ID_Vehicle" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="Vehicle_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DealershipEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Brands" EntityType="Self.Brands" />
+    <EntitySet Name="Customers" EntityType="Self.Customers" />
+    <EntitySet Name="Models" EntityType="Self.Models" />
+    <EntitySet Name="Orders" EntityType="Self.Orders" />
+    <EntitySet Name="Vehicles" EntityType="Self.Vehicles" />
+    <AssociationSet Name="FK__Vehicles__Brand___5629CD9C" Association="Self.FK__Vehicles__Brand___5629CD9C">
+      <End Role="Brands" EntitySet="Brands" />
+      <End Role="Vehicles" EntitySet="Vehicles" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Orders__Customer__59FA5E80" Association="Self.FK__Orders__Customer__59FA5E80">
+      <End Role="Customers" EntitySet="Customers" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Vehicles__Model___571DF1D5" Association="Self.FK__Vehicles__Model___571DF1D5">
+      <End Role="Models" EntitySet="Models" />
+      <End Role="Vehicles" EntitySet="Vehicles" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Orders__Vehicle___5AEE82B9" Association="Self.FK__Orders__Vehicle___5AEE82B9">
+      <End Role="Vehicles" EntitySet="Vehicles" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
